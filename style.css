@@ -1,0 +1,39 @@
+.root {
+    -fx-background-image: url("background.jpg");
+    -fx-background-color: linear-gradient(#FFFFFF, #bec4de);
+    -fx-font-size: 12.0pt;
+}
+
+#state {
+    -fx-background-radius: 100.0;
+    -fx-font-size: 12.0pt;
+    -fx-background-color: linear-gradient(#bababf, #e2dede);
+}
+
+.label {
+    -fx-font-size: 14.0pt;
+    -fx-text-fill: #0b1d66;
+}
+
+.button {
+    -fx-background-radius: 5.0;
+    -fx-font-size: 14.0pt;
+    -fx-background-color: linear-gradient(#0f0f85, #01090e);
+    -fx-text-fill: #96b0e2;
+}
+
+#button{
+    -fx-text-origin: "Select File";
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#b4c4e5, #9293ae);
+    -fx-background-radius: 5.0;
+    -fx-cursor: hand;
+    -fx-text-fill: #0b1d66;
+}
+
+.table-view {
+    -fx-font-size: 10.0pt;
+    -fx-background-color: #0b1d66;
+}

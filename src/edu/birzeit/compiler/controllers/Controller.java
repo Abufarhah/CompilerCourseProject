@@ -56,6 +56,7 @@ public class Controller {
     }
 
     public void next(){
+        state.setVisible(true);
         if(step==0){
             removeLambdas(table);
             state.setText("Removal of Lambda Transitions");
@@ -417,6 +418,7 @@ public class Controller {
         tableView.getItems().clear();
         TableColumn<String, String> column = new TableColumn<>("State");
         column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        column.setMinWidth(100);
         tableView.getColumns().add(column);
         int n = allTransitions.size();
         TableColumn<String, String>[] columns = new TableColumn[n];
@@ -425,6 +427,7 @@ public class Controller {
         for (int i = 0; i < n; ++i) {
             columns[i] = new TableColumn<String, String>(trns.get(i) + "");
             columns[i].setCellValueFactory(new PropertyValueFactory<>("v"+(i+1)));
+            columns[i].setMinWidth(40);
             tableView.getColumns().add(columns[i]);
         }
         table.forEach((s, state) -> {
@@ -438,11 +441,6 @@ public class Controller {
             Row row= RowFactory.getInstance(n,state.isFinalState()?state.getName()+"*":state.getName(),list);
             tableView.getItems().add(row);
         });
-
-//        column.setCellValueFactory(new PropertyValueFactory<>("hash"));
-//        String string="layth";
-//        tableView.getColumns().add(column);
-//        tableView.getItems().
     }
 
     public boolean checkAgainstRegex(ConcurrentHashMap<String, State> table,
