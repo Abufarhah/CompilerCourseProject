@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="Controller" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="493.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.birzeit.compiler.controllers.Controller">
+    <children>
+        <Button fx:id="button" layoutX="176.0" layoutY="32.0" mnemonicParsing="false" onAction="#buttonAction" text="Select File" />
+        <TableView fx:id="tableView" layoutX="87.0" layoutY="107.0" prefHeight="275.0" prefWidth="412.0" />
+      <Label layoutX="87.0" layoutY="405.0" prefHeight="33.0" prefWidth="149.0" text="Enter String to check" />
+      <TextField fx:id="textField" layoutX="291.0" layoutY="405.0" prefHeight="33.0" prefWidth="209.0" promptText="Enter the String" />
+      <Button fx:id="checkButton" layoutX="87.0" layoutY="446.0" mnemonicParsing="false" onAction="#checkButtonAction" prefHeight="33.0" prefWidth="149.0" text="Check" visible="false" />
+      <Label fx:id="resultLabel" layoutX="291.0" layoutY="446.0" prefHeight="33.0" prefWidth="209.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="next" layoutX="317.0" layoutY="32.0" mnemonicParsing="false" onAction="#next" text="Next Step" />
+      <Label fx:id="state" alignment="CENTER" layoutX="176.0" layoutY="74.0" prefHeight="33.0" prefWidth="209.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+
+    </children>
+</Pane>
