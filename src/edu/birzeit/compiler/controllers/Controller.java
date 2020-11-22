@@ -323,7 +323,7 @@ public class Controller {
             }
         }
         for (int i = 0; i < finalKeys.size(); ++i) {
-            for (int j = i + 1; j < finalKeys.size(); ++j) {
+            for (int j = i + 1; j < finalKeys.size()-1; ++j) {
                 AtomicBoolean flag = new AtomicBoolean(true);
                 int finalJ = j;
                 int finalI = i;
