@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="CompilerCourseProject">
+    <output-path>$PROJECT_DIR$/out/artifacts/CompilerCourseProject</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="edu.birzeit.compiler.Main" />
+        <option name="description" value="Compiler Course Project&#13;&#10;Convert NDFSA to DFSA and checking RegEx" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="Compiler Course Project" />
+        <option name="updateMode" value="always" />
+        <option name="vendor" value="Abufarhah" />
+        <option name="version" value="1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="CompilerCourseProject.jar">
+        <element id="module-output" name="CompilerCourseProject" />
+      </element>
+    </root>
+  </artifact>
+</component>

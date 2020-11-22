@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="Controller" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="567.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.birzeit.compiler.controllers.Controller">
+<Pane stylesheets="@/res/style.css" fx:id="Controller" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="567.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.birzeit.compiler.controllers.Controller">
     <children>
         <Button fx:id="button" layoutX="67.0" layoutY="98.0" mnemonicParsing="false" onAction="#buttonAction" text="Select File" />
       <Button fx:id="next" layoutX="437.0" layoutY="98.0" mnemonicParsing="false" onAction="#next" text="Next Step" />

@@ -14,9 +14,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setResizable(false);
         primaryStage.setTitle("Regular Expressions");
-        primaryStage.getIcons().add(new Image("file:logo.jpg"));
+        primaryStage.getIcons().add(new Image("file:res/logo.ico"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("file:style.css");
+        scene.getStylesheets().add("file:res/style.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
