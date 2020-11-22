@@ -50,34 +50,39 @@ public class Controller {
         if (file != null) {
             allTransitions = new ArrayList<>();
             table = readFile(allTransitions, file);
+            state.setVisible(true);
             state.setText("Initial Transition Table");
             populateTable();
+            step = 0;
+            checkButton.setVisible(false);
+            resultLabel.setText("");
         }
     }
 
     public void next() {
-        state.setVisible(true);
-        if (step == 0) {
-            removeLambdas(table);
-            state.setText("Removal of Lambda Transitions");
-            populateTable();
-            ++step;
-        } else if (step == 1) {
-            removeNonDeterministic(table);
-            state.setText("Removal of Non-Determinism");
-            populateTable();
-            ++step;
-        } else if (step == 2) {
-            removeNonAccessible(table);
-            state.setText("Removal of In-Accessible States");
-            populateTable();
-            ++step;
-        } else if (step == 3) {
-            mergeEquivalent(table, allTransitions);
-            state.setText("Merging Equivalent States");
-            populateTable();
-            checkButton.setVisible(true);
-            ++step;
+        if (table != null) {
+            if (step == 0) {
+                removeLambdas(table);
+                state.setText("Removal of Lambda Transitions");
+                populateTable();
+                ++step;
+            } else if (step == 1) {
+                removeNonDeterministic(table);
+                state.setText("Removal of Non-Determinism");
+                populateTable();
+                ++step;
+            } else if (step == 2) {
+                removeNonAccessible(table);
+                state.setText("Removal of In-Accessible States");
+                populateTable();
+                ++step;
+            } else if (step == 3) {
+                mergeEquivalent(table, allTransitions);
+                state.setText("Merging Equivalent States");
+                populateTable();
+                checkButton.setVisible(true);
+                ++step;
+            }
         }
     }
 
@@ -323,7 +328,7 @@ public class Controller {
             }
         }
         for (int i = 0; i < finalKeys.size(); ++i) {
-            for (int j = i + 1; j < finalKeys.size()-1; ++j) {
+            for (int j = i + 1; j < finalKeys.size() - 1; ++j) {
                 AtomicBoolean flag = new AtomicBoolean(true);
                 int finalJ = j;
                 int finalI = i;
@@ -435,10 +440,10 @@ public class Controller {
             List<String> list = new ArrayList<>();
             state.getTransitions().forEach((character, states) -> {
                 val.set("");
-                states.forEach(state1 -> val.set(state1.isFinalState() ? val.get() + state1.getName() + "* " : val.get() + state1.getName() + " "));
+                states.forEach(state1 -> val.set(state1.isFinalState() && state1.isStartState() ? val.get() + state1.getName() + "* " : val.get() + state1.getName() + " "));
                 list.add(val.get());
             });
-            Row row = RowFactory.getInstance(n, state.isFinalState() ? state.getName() + "*" : state.getName(), list);
+            Row row = RowFactory.getInstance(n, state.isFinalState() && state.isStartState() ? "^" + state.getName() + "$" : state.isFinalState() ? state.getName() + "$" : state.isStartState() ? "^" + state.getName() : state.getName(), list);
             tableView.getItems().add(row);
         });
     }
@@ -456,7 +461,23 @@ public class Controller {
             int finalI = i;
             AtomicBoolean valid = new AtomicBoolean(false);
             currentState.get().getTransitions().forEach((character, states) -> {
-                if (character.equals(c)) {
+                if (Character.isDigit(c) || Character.isLetter(c)) {
+                    if (Character.isDigit(c) && character == 'd') {
+                        if (states.size() == 0) {
+                            stuck.set(true);
+                        } else {
+                            valid.set(true);
+                            currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
+                        }
+                    } else if (Character.isLetter(c) && character == 'l') {
+                        if (states.size() == 0) {
+                            stuck.set(true);
+                        } else {
+                            valid.set(true);
+                            currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
+                        }
+                    }
+                } else if (character.equals(c)) {
                     if (currentState.get().getTransitions().get(character).stream().findFirst().isPresent()) {
                         valid.set(true);
                         currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
@@ -471,6 +492,9 @@ public class Controller {
             if (!valid.get()) {
                 stuck.set(true);
             }
+        }
+        if (string.length() == 0 && currentState.get().isStartState() && currentState.get().isFinalState()) {
+            return true;
         }
         return flag && !stuck.get() && result.get();
     }

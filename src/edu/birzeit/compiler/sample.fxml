@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="Controller" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="560.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.birzeit.compiler.controllers.Controller">
+<Pane fx:id="Controller" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="567.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.birzeit.compiler.controllers.Controller">
     <children>
         <Button fx:id="button" layoutX="67.0" layoutY="98.0" mnemonicParsing="false" onAction="#buttonAction" text="Select File" />
       <Button fx:id="next" layoutX="437.0" layoutY="98.0" mnemonicParsing="false" onAction="#next" text="Next Step" />
@@ -15,11 +15,14 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label fx:id="state" alignment="CENTER" layoutX="182.0" layoutY="32.0" prefHeight="55.0" prefWidth="250.0" visible="false">
+      <Label fx:id="state" alignment="CENTER" layoutX="161.0" layoutY="32.0" prefHeight="55.0" prefWidth="288.0" visible="false">
          <font>
             <Font name="Andalus" size="14.0" />
          </font></Label>
       <Button fx:id="checkButton" layoutX="67.0" layoutY="488.0" mnemonicParsing="false" onAction="#checkButtonAction" prefHeight="33.0" prefWidth="167.0" text="Check" visible="false" />
+      <Label fx:id="nav1" layoutX="42.0" layoutY="541.0" prefHeight="25.0" prefWidth="109.0" text="Start State: ^" />
+      <Label fx:id="nav2" layoutX="170.0" layoutY="541.0" prefHeight="25.0" prefWidth="109.0" text="End State: $" />
+      <Label layoutX="449.0" layoutY="541.0" prefHeight="25.0" prefWidth="176.0" text="© Layth Abufarhah" />
 
     </children>
 </Pane>

@@ -6,7 +6,8 @@
 
 #state {
     -fx-background-radius: 100.0;
-    -fx-font-size: 12.0pt;
+    -fx-font-size: 13.0pt;
+    -fx-font-weight: 700;
     -fx-background-color: linear-gradient(#bababf, #e2dede);
 }
 
@@ -36,4 +37,18 @@
 .table-view {
     -fx-font-size: 10.0pt;
     -fx-background-color: #0b1d66;
+}
+
+#nav1 {
+    -fx-background-radius: 5.0;
+    -fx-font-size: 13.0pt;
+    -fx-text-fill: #04122f;
+    -fx-background-color: linear-gradient(#bababf, #e2dede);
+}
+
+#nav2 {
+    -fx-background-radius: 5.0;
+    -fx-font-size: 13.0pt;
+    -fx-text-fill: #04122f;
+    -fx-background-color: linear-gradient(#bababf, #e2dede);
 }
