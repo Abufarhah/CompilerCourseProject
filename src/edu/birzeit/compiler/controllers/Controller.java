@@ -55,24 +55,24 @@ public class Controller {
         }
     }
 
-    public void next(){
+    public void next() {
         state.setVisible(true);
-        if(step==0){
+        if (step == 0) {
             removeLambdas(table);
             state.setText("Removal of Lambda Transitions");
             populateTable();
             ++step;
-        }else if(step==1){
+        } else if (step == 1) {
             removeNonDeterministic(table);
             state.setText("Removal of Non-Determinism");
             populateTable();
             ++step;
-        }else if(step==2){
+        } else if (step == 2) {
             removeNonAccessible(table);
             state.setText("Removal of In-Accessible States");
             populateTable();
             ++step;
-        }else if(step==3){
+        } else if (step == 3) {
             mergeEquivalent(table, allTransitions);
             state.setText("Merging Equivalent States");
             populateTable();
@@ -422,23 +422,23 @@ public class Controller {
         tableView.getColumns().add(column);
         int n = allTransitions.size();
         TableColumn<String, String>[] columns = new TableColumn[n];
-        ArrayList<Character> trns=new ArrayList<>();
+        ArrayList<Character> trns = new ArrayList<>();
         table.forEach((s, state) -> state.getTransitions().forEach((character, states) -> trns.add(character)));
         for (int i = 0; i < n; ++i) {
             columns[i] = new TableColumn<String, String>(trns.get(i) + "");
-            columns[i].setCellValueFactory(new PropertyValueFactory<>("v"+(i+1)));
+            columns[i].setCellValueFactory(new PropertyValueFactory<>("v" + (i + 1)));
             columns[i].setMinWidth(40);
             tableView.getColumns().add(columns[i]);
         }
         table.forEach((s, state) -> {
-            AtomicReference<String> val= new AtomicReference<>("");
-            List<String> list=new ArrayList<>();
+            AtomicReference<String> val = new AtomicReference<>("");
+            List<String> list = new ArrayList<>();
             state.getTransitions().forEach((character, states) -> {
                 val.set("");
-                states.forEach(state1 -> val.set(state1.isFinalState()?val.get()+state1.getName()+"* ":val.get()+state1.getName()+" "));
+                states.forEach(state1 -> val.set(state1.isFinalState() ? val.get() + state1.getName() + "* " : val.get() + state1.getName() + " "));
                 list.add(val.get());
             });
-            Row row= RowFactory.getInstance(n,state.isFinalState()?state.getName()+"*":state.getName(),list);
+            Row row = RowFactory.getInstance(n, state.isFinalState() ? state.getName() + "*" : state.getName(), list);
             tableView.getItems().add(row);
         });
     }
@@ -452,33 +452,24 @@ public class Controller {
         AtomicBoolean result = new AtomicBoolean(false);
         for (int i = 0; i < string.length(); ++i) {
             Character c = string.charAt(i);
-            if (Character.isDigit(c) && !allTransitions.contains('d')) {
-                return false;
-            } else if (Character.isLetter(c) && !allTransitions.contains('l')) {
-                return false;
-            } else if (!Character.isDigit(c) && !Character.isLetter(c)) {
-                return false;
-            } else {
-                Character next;
-                int finalI = i;
-                currentState.get().getTransitions().forEach((character, states) -> {
-                    if (Character.isDigit(c) && character == 'd') {
-                        if (states.size() == 0) {
-                            stuck.set(true);
-                        } else {
-                            currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
-                        }
-                    } else if (Character.isLetter(c) && character == 'l') {
-                        if (states.size() == 0) {
-                            stuck.set(true);
-                        } else {
-                            currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
-                        }
+            Character next;
+            int finalI = i;
+            AtomicBoolean valid = new AtomicBoolean(false);
+            currentState.get().getTransitions().forEach((character, states) -> {
+                if (character.equals(c)) {
+                    if (currentState.get().getTransitions().get(character).stream().findFirst().isPresent()) {
+                        valid.set(true);
+                        currentState.set(currentState.get().getTransitions().get(character).stream().findFirst().get());
+                    } else {
+                        valid.set(false);
                     }
-                    if (currentState.get().isFinalState() && finalI == string.length() - 1) {
-                        result.set(true);
-                    }
-                });
+                }
+                if (currentState.get().isFinalState() && finalI == string.length() - 1) {
+                    result.set(true);
+                }
+            });
+            if (!valid.get()) {
+                stuck.set(true);
             }
         }
         return flag && !stuck.get() && result.get();
